@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "SiteBlocker",
+    "version": "1.0",
+    "description": "This browser extension allows user to block web sites",
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "permissions": ["storage"]
+  }
