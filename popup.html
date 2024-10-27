@@ -1,14 +1,33 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>My Extension</title>
-  <style>
-    body { width: 200px; }
-    h1 { font-size: 20px; }
-  </style>
-</head>
-<body>
-  <h1>Hello, World!</h1>
-  <button id="btn">Click Me</button>
-</body>
+<html lang = "en">
+  <head>
+    <title>Web Sites Blocker</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  
+  <body>
+    <h2>Website Blocker</h2>
+    
+    <ul class="blocked-list">
+      <li>
+        <span class="website-name">example.com</span>
+        <button class="delete-btn">🗑️</button>
+      </li>
+      <li>
+        <span class="website-name">another-site.com</span>
+        <button class="delete-btn">🗑️</button>
+      </li>
+    </ul>
+
+    <div class="bottom-buttons">
+      <button id="addCurrent">Add current website</button>
+      <button id="addLink">Add website form a Link </button>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
 </html>
