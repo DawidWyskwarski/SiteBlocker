@@ -75,7 +75,7 @@ function loadBlockedSites() {
         const blockedSites = data.blockedSites;
 
         const blockedList = document.getElementById("blocked-list");
-        blockedList.innerHTML = ""; // Wyczyść listę, aby uniknąć duplikatów
+        blockedList.innerHTML = ""; 
 
         blockedSites.forEach((site) => {
             const listItem = document.createElement("li");
