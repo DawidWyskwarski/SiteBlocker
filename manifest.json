@@ -3,8 +3,21 @@
     "name": "SiteBlocker",
     "version": "1.0",
     "description": "This browser extension allows user to block web sites",
+
+    "permissions": ["storage",
+                    "tabs",
+                    "activeTab",
+                    "scripting"
+                  ],
     "action": {
-      "default_popup": "popup.html"
+      "default_popup": "popup/popup.html",
+
+      "default_icon":{
+        "16": "icons/SiteBlocker16.png"
+      }
     },
-    "permissions": ["storage","tabs", "activeTab"]
+
+    "background": {
+      "service-worker": "background.js"
+    }
   }
