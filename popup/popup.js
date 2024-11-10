@@ -6,6 +6,8 @@ const unBlockable = ["chrome://", 'about:', 'edge://', 'opera://',
 document.addEventListener("DOMContentLoaded", () => {
     loadBlockedSites();
     
+    
+
     const addCurrentButton = document.getElementById("addCurrent");
     addCurrentButton.addEventListener("click", blockCurr);
 });
