@@ -6,62 +6,121 @@
         <title>Blocked Site</title>
 
         <style>
-            body{
-                background-color: rgb(232, 232, 232);
-                display: flex;
-                justify-content: center; 
-                align-items: center;     
-                height: 100vh;           
-                margin: 0;  
-            }
-    
-            .mainBox{
-                background-color: rgb(23, 23, 23);
-                width: 350px;  
-                height: 400px;
-                border-radius: 30px;
-                perspective: 1000px;
-            } 
-    
-            .mainBox-inner{
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: medium;
-                padding: 20px;
-                color:  rgb(232, 232, 232);
-                text-align: center;
-                transition: transform 0.8s;
-                transform-style: preserve-3d;
-            }
-    
-            .mainBox:hover .mainBox-inner{
-                transform: rotateY(-180deg);
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
             
-            .announcement, .listOfBetterThing{
-                width: 100%;
-                height: 100%;
-                backface-visibility: hidden;
+            body{
+                background-color: rgb(232, 232, 232);
+                font-family: Arial, Helvetica, sans-serif;
+                color: rgb(232, 232, 232);
             }
 
-            .listOfBetterThing{
+            .gradient {
+	            width: 100vw;
+	            height: 100vh;
+	            background: linear-gradient(334deg, #6b97f7, #7525e2, #f7137e);
+	            background-size: 180% 180%;
+	            animation: gradient-animation 6s ease infinite;
+            }
+            @keyframes gradient-animation {
+	            0% {
+		            background-position: 0% 50%;
+	            }
+	            50% {
+		            background-position: 100% 50%;
+	            }
+	            100% {
+		            background-position: 0% 50%;
+	            }
+            }
+
+            label{
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: -10%;
+                width: 350px;
+                height: 400px;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                transform: translate(-50%, 50%);
+                cursor: pointer;
+            }
+
+            .info{
+                position:relative;
+                width: 100%;
+                height: 100%;
+                transform-style: preserve-3d;
+                transition: all 0.5s ease-in-out;
+            }
+
+            .info .front, .back{
+                background-color: rgb(23, 23, 23);;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                backface-visibility: hidden;
+                border-radius: 30px;
+                padding: 20px;
+            }
+
+            .click{
+                position: absolute;
+                bottom: 50px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: rgba(232, 232, 232, 0.4);
+                font-size: 13px;
+            }
+
+            .front h1{
+                font-size: 40px;
+                color: #901030;
+                margin-bottom: 30px;
+            }
+
+            .message{
+                margin-left: 10px;
+                margin-right: 10px;
+                font-size: medium;
+            }
+
+            .info .back{
+                transform: rotateY(180deg);
+            }
+
+            input{
+                display: none;
+            }
+
+            :checked + .info{
                 transform: rotateY(180deg);
             }
 
         </style>
     </head>
     <body>
-        <div class="mainBox">
-            <div class="mainBox-inner">
-                <div class="announcement">
-                    <h1>Hold up!</h1>
-                    <p>It looks like you can't access this website</p>
-                    <p id="hint">Hover to see list of </p>
-
+        <div class="gradient">
+            <label>
+                <input type="checkbox"/>
+                <div class="info">
+                    <div class="front">
+                        <h1>Hold up!</h1>
+                        <p class="message">Looks like this site is currently off-limits.</br>But don’t worry, you’re not out of options!</br></br></p>
+                        <p class="message">We’ve put together a list of fun and productive things you can do instead.</br></br></p>
+                        <p class="message">If you still wish to visit this website, you can change your access preferences in the settings to unblock it.</p>
+                        <p class="click">Click to explore your options.</p>
+                    </div>
+                    <div class="back">
+                        <h1>LIST</h1>
+                    </div>
                 </div>
-                <div class="listOfBetterThing">
-                    <h1>LIST</h1>
-                </div>
-            </div>
+            </label>
         </div>
     </body>
     </html>
