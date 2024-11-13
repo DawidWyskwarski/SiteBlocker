@@ -14,16 +14,17 @@
             
             body{
                 background-color: rgb(232, 232, 232);
-                font-family: Arial, Helvetica, sans-serif;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
                 color: rgb(232, 232, 232);
             }
 
             .gradient {
 	            width: 100vw;
 	            height: 100vh;
-	            background: linear-gradient(334deg, #6b97f7, #7525e2, #f7137e);
+	            /*background: linear-gradient(334deg, #6b97f7, #7525e2, #f7137e);*/
+                background: linear-gradient(334deg, rgb(210, 139, 139), #901030, #5e051b);
 	            background-size: 180% 180%;
-	            animation: gradient-animation 6s ease infinite;
+	            animation: gradient-animation 7s ease infinite;
             }
             @keyframes gradient-animation {
 	            0% {
@@ -102,6 +103,49 @@
                 transform: rotateY(180deg);
             }
 
+            .back h1{
+                font-size: 35px;
+                color: #901030;
+                margin-bottom: 25px;
+            }
+
+            .back ul{
+                list-style-type: none;
+                padding: 15;
+                flex-grow: 1;
+                height: 65%;
+                overflow-y: auto;
+            }
+
+            .back li{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 2px 6px;
+                font-size: 17px;
+                padding-left: 30px;
+                margin-bottom: 10px;
+            }
+
+            ::-webkit-scrollbar{
+                width: 8px; 
+                height: 8px;
+            }
+            
+            ::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background-color: #901030; 
+                border-radius: 8px; 
+                border: 2px solid transparent; 
+                background-clip: content-box; 
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background-color: #6f0f27; 
+            }
         </style>
     </head>
     <body>
@@ -117,7 +161,39 @@
                         <p class="click">Click to explore your options.</p>
                     </div>
                     <div class="back">
-                        <h1>LIST</h1>
+                        <h1 class="activities">Other things to do</h1>
+                        <ul>
+                            <li>Pursue your passion</li>
+                            <li>Write a little story</li>
+                            <li>Go for a run</li>
+                            <li>Call someone you haven't in a while</li>
+                            <li>Cook a new dish</li>
+                            <li>Go to the gym</li>
+                            <li>Read a book</li>
+                            <li>Watch a movie</li>
+                            <li>Listen to music</li>
+                            <li>Do the work you need to do</li>
+                            <li>Learn an instrument</li>
+                            <li>Draw whats next to you</li>
+                            <li>Start a diary</li>
+                            <li>Go cycling</li>
+                            <li>Play basketball</li>
+                            <li>Meditate</li>
+                            <li>Visit a local museum</li>
+                            <li>Study</li>
+                            <li>Listen to a podcast</li>
+                            <li>Send a meme to a friend</li>
+                            <li>Watch a TV show</li>
+                            <li>Learn a new language</li>
+                            <li>Write some lyrics</li>
+                            <li>Call your parents</li>
+                            <li>Play football</li>
+                            <li>Meet up with your friends</li>
+                            <li>Oraganize a trip</li>
+
+                        </ul>
+                        <p class="click">Click to go back</p>
+                        
                     </div>
                 </div>
             </label>

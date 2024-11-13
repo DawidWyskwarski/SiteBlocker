@@ -1,7 +1,7 @@
 const unBlockable = ["chrome://", 'about:', 'edge://', 'opera://',
                      'google.', 'bing.', 'yahoo.', 'duckduckgo.', 'baidu.', 'yandex.',
                      'mozilla.', 'microsoft.', 'outlook.live.', 'poczta.','mail.',
-                     '.gov'];
+                     '.gov', '.edu'];
 
 document.addEventListener("DOMContentLoaded", () => {
     loadBlockedSites();
@@ -53,6 +53,8 @@ function addBlockedSite(site) {
         listItem.appendChild(siteName);
         listItem.appendChild(deleteBtn);
         blockedList.appendChild(listItem);
+
+        chrome.tabs.reload();
 
         const updatedSites = [...blockedSites, site];
         chrome.storage.sync.set({ blockedSites: updatedSites }, () => {
