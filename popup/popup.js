@@ -3,15 +3,16 @@ const unBlockable = ["chrome://", 'about:', 'edge://', 'opera://',
                      'mozilla.', 'microsoft.', 'outlook.live.', 'poczta.','mail.',
                      '.gov', '.edu'];
 
+const customAlert = document.getElementById('custom-alert')
+
 document.addEventListener("DOMContentLoaded", () => {
     loadBlockedSites();
     
     
-
     const addCurrentButton = document.getElementById("addCurrent");
     addCurrentButton.addEventListener("click", blockCurr);
 });
-  
+
 function blockCurr() {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (tabs.length > 0) {
@@ -19,7 +20,13 @@ function blockCurr() {
             const url = new URL(currentTab.url);
 
             if( cantBlock(url.origin) ){
-                alert("Can't block this");
+
+                customAlert.style.display = 'flex';
+
+                setTimeout(() => {
+                    customAlert.style.display = 'none';
+                }, 3000);
+
                 return;
             }
 
@@ -28,7 +35,7 @@ function blockCurr() {
         }
     });
 }
-  
+
 function addBlockedSite(site) {
     
     chrome.storage.sync.get({blockedSites: []}, (data) =>{
