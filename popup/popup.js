@@ -5,6 +5,32 @@ const unBlockable = ["chrome://", 'about:', 'edge://', 'opera://',
 
 const customAlert = document.getElementById('custom-alert')
 
+function fade(element) {
+    var op = 1; 
+    var timer = setInterval(function () {
+        if (op <= 0.1){
+            clearInterval(timer);
+            element.style.display = 'none';
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 50);
+}
+
+function appear(element) {
+    var op = 0.1;  
+    element.style.display = 'flex';
+    var timer = setInterval(function () {
+        if (op >= 1){
+            clearInterval(timer);
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op += op * 0.1;
+    }, 10);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     loadBlockedSites();
     
@@ -20,11 +46,11 @@ function blockCurr() {
             const url = new URL(currentTab.url);
 
             if( cantBlock(url.origin) ){
-
-                customAlert.style.display = 'flex';
-
+                
+                appear(customAlert);
+                
                 setTimeout(() => {
-                    customAlert.style.display = 'none';
+                    fade(customAlert);
                 }, 3000);
 
                 return;
