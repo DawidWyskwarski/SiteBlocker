@@ -47,6 +47,9 @@ function blockCurr() {
 
             if( cantBlock(url.origin) ){
                 
+                const message = document.getElementById('message');
+                message.innerText = "Can't block this site"
+
                 appear(customAlert);
                 
                 setTimeout(() => {
@@ -68,6 +71,16 @@ function addBlockedSite(site) {
         const blockedSites = data.blockedSites;
 
         if(blockedSites.includes(site)){
+            
+            const message = document.getElementById('message');
+            message.innerText = "Site already blocked"
+
+            appear(customAlert);
+                
+            setTimeout(() => {
+                fade(customAlert);
+            }, 3000);
+            
             return;
         }
 

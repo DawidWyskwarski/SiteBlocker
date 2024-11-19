@@ -13,17 +13,18 @@
   <body>
     <h2>Website <span style="color: #901030">Blocker</span></h2>
     
-    <p>Blocked websites:</p>
+    <label for="collapsible-head">Blocked sites:</label>
+      
     <ul id="blocked-list" class="blocked-list">
     </ul>
-
+    
     <div class="bottom-buttons">
       <button id="addCurrent">Block current</button>
       <button id="addLink">Block form a Link</button>
     </div>
 
     <div class="alert" id="custom-alert">
-      <p>Can't block this page</p>
+      <p id="message">Error</p>
     </div>
 
     <script src="popup.js"></script>

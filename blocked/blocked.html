@@ -6,22 +6,26 @@
         <title>Blocked Site</title>
 
         <style>
-            *{
+            *,
+            *::before,
+            *::after {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
             }
-            
-            body{
-                background-color: rgb(232, 232, 232);
-                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                color: rgb(232, 232, 232);
+
+            html, body {
+                width: 100% !important;
+                height: 100% !important;
+                font-size: 16px !important; 
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+                color: rgb(232, 232, 232) !important;
+                background: none !important;
             }
 
-            .gradient {
-	            width: 100vw;
-	            height: 100vh;
-	            /*background: linear-gradient(334deg, #6b97f7, #7525e2, #f7137e);*/
+            .gradient{
+	            width: 100vw ;
+	            height: 100vh ;
                 background: linear-gradient(334deg, rgb(210, 139, 139), #901030, #5e051b);
 	            background-size: 180% 180%;
 	            animation: gradient-animation 7s ease infinite;
