@@ -1,9 +1,10 @@
 const unBlockable = ["chrome://", 'about:', 'edge://', 'opera://',
                      'google.', 'bing.', 'yahoo.', 'duckduckgo.', 'baidu.', 'yandex.',
                      'mozilla.', 'microsoft.', 'outlook.live.', 'poczta.','mail.',
-                     '.gov', '.edu'];
+                     '.gov', '.edu', 'chrome-extension://'];
 
 const customAlert = document.getElementById('custom-alert')
+const setPass = document.getElementById('set-password')
 
 function fade(element) {
     var op = 1; 
@@ -59,8 +60,21 @@ function blockCurr() {
                 return;
             }
 
-            const domain = url.hostname;
-            addBlockedSite(domain);
+            setPass.style.display = 'flex'; 
+            const textInput = document.getElementById('setter')
+
+            textInput.addEventListener("keydown", function(event) {
+                
+                if(event.key === "Enter"){
+                    const pass = textInput.value;
+                    textInput.value = "";
+                    alert(pass);
+
+                    fade(setPass)
+                    const domain = url.hostname;
+                    addBlockedSite(domain);
+                }
+            });
         }
     });
 }

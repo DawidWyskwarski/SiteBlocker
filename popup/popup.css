@@ -59,7 +59,16 @@ p{
     color: rgb(232, 232, 232);
     font-size: 16px;
 }
-  
+
+.website-name{
+    filter: blur(2px);
+}
+
+.website-name:hover{
+    filter: none;
+    cursor:default;
+}
+
 .delete-btn {
     background: none;
     border: none;
@@ -120,4 +129,44 @@ p{
     font-weight: 600;
     margin: 0;
     text-align: center; 
+}
+
+#set-password {
+    display: none;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 30%;
+    background-color: rgb(232, 232, 232);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    padding: 10px;
+
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+#set-password p {
+    color: black;
+    font-weight: 600;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    font-size: 17px;
+    text-align: center;
+}
+
+#setter {
+    display: inline-block;
+    width: 125px;
+    height: 15px;
+    font-size: 14px; 
+    border: 0;
+    border-bottom: 2px solid black;
+    border-radius: 5px;
+    outline: none; 
+    padding: 5px;
 }
