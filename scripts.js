@@ -1,13 +1,7 @@
-let listOfBlockedSites = [];
+chrome.storage.sync.get({ blockedSites: {} }, (data) => {
+    const listOfBlockedSites = data.blockedSites;
 
-chrome.storage.sync.get({blockedSites: []},(data) => {
-    listOfBlockedSites = data.blockedSites || [];
-
-    listOfBlockedSites.forEach(siteDomain => {
-        if(siteDomain === window.location.hostname){
-
-            window.location.href = window.location.href = chrome.runtime.getURL("blocked/blocked.html");
-        }
-    });
-
+    if (listOfBlockedSites[window.location.hostname]) {
+        window.location.href = chrome.runtime.getURL("blocked/blocked.html");
+    }
 });

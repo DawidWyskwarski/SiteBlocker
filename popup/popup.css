@@ -131,7 +131,7 @@ p{
     text-align: center; 
 }
 
-#set-password {
+#password {
     display: none;
     position: fixed;
     top: 45%;
@@ -150,7 +150,7 @@ p{
     align-items: center; 
 }
 
-#set-password p {
+#password p {
     color: black;
     font-weight: 600;
     margin-top: 0px;
