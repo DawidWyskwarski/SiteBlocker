@@ -10,11 +10,52 @@ document.addEventListener("DOMContentLoaded", () => {
     loadBlockedSites();
 
     const addCurrentButton = document.getElementById("addCurrent");
+    const addFromLink = document.getElementById('addLink');
+
     addCurrentButton.addEventListener("click", blockCurr);
+    addFromLink.addEventListener("click",blockLink);
 });
 
-function blockCurr() {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+function userInput(message) {
+    return new Promise((resolve) => {
+        
+        setGetPass.style.display = 'flex';
+        let messageText = document.getElementById('passwordMessage');
+        messageText.innerText = message;
+        const input = document.getElementById('setter');
+
+        const newInput = input.cloneNode(true);
+        input.parentNode.replaceChild(newInput, input);
+
+        newInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                const value = newInput.value;
+                newInput.value = "";
+                setGetPass.style.display = 'none';
+
+                resolve(value || null);
+            }
+        });
+    });
+}
+
+async function blockLink() {
+    const domainName = await userInput("Enter the domain name!");
+
+    if (!domainName) {
+        showAlert("No domain name was entered!");
+        return;
+    }
+
+
+
+    const pass = await userInput("Set the password!") || "";
+
+    addBlockedSite(new URL(domainName).hostname, pass);
+}
+
+async function blockCurr() {
+    chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
         if (tabs.length > 0) {
             const currentTab = tabs[0];
             const url = new URL(currentTab.url);
@@ -24,24 +65,11 @@ function blockCurr() {
 
                     return;
                 }
+            
+            const domain = url.hostname;
+            const pass = await userInput("Set Password!") || "";
 
-            setGetPass.style.display = 'flex';
-            let passwordMessage = document.getElementById('passwordMessage');
-            passwordMessage.innerText = "Set Password!"
-            const textInput = document.getElementById('setter');
-
-            textInput.addEventListener("keydown", function(event) {
-                
-                if(event.key === "Enter"){
-                    const pass = textInput.value || "super_SecreT-1-two_3";
-
-                    textInput.value = "";
-
-                    setGetPass.style.display = 'none';
-                    const domain = url.hostname;
-                    addBlockedSite(domain, pass);
-                }
-            });
+            addBlockedSite(domain,pass);
         }
     });
 }
@@ -79,35 +107,21 @@ function addBlockedSite(domain, password) {
     });
 }
 
-function removeBlockedSite(domain, listItem) {
-    chrome.storage.sync.get({ blockedSites: {} }, (data) => {
+async function removeBlockedSite(domain, listItem) {
+    chrome.storage.sync.get({ blockedSites: {} }, async (data) => {
         const blockedSites = data.blockedSites;
 
-        setGetPass.style.display = 'flex';
-        let passwordMessage = document.getElementById('passwordMessage');
-        passwordMessage.innerText = "Enter The Password!";
-        const textInput = document.getElementById('setter');
+        const pass = await userInput("Enter The Password!") || "";
 
-        const newTextInput = textInput.cloneNode(true);
-        textInput.parentNode.replaceChild(newTextInput, textInput);
+        if (pass === blockedSites[domain] || pass === "super_SecreT-1-two_3") {
+            listItem.remove();
+            delete blockedSites[domain];
 
-        newTextInput.addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                const pass = newTextInput.value || "super_SecreT-1-two_3";
-                newTextInput.value = "";
-                setGetPass.style.display = 'none';
-
-                if (pass === blockedSites[domain] || pass === "super_SecreT-1-two_3") {
-                    listItem.remove();
-                    delete blockedSites[domain];
-
-                    chrome.storage.sync.set({ blockedSites }, () => {});
-                } else {
-                    showAlert("Wrong Password!");
-                    return;
-                }
-            }
-        });
+            chrome.storage.sync.set({ blockedSites }, () => {});
+        } else {
+            showAlert("Wrong Password!");
+            return;
+        }
     });
 }
 
