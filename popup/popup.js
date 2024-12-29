@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const addFromLink = document.getElementById('addLink');
 
     addCurrentButton.addEventListener("click", blockCurr);
-    addFromLink.addEventListener("click",blockLink);
+    addFromLink.addEventListener("click", blockLink);
 });
 
 function userInput(message) {
@@ -40,18 +40,16 @@ function userInput(message) {
 }
 
 async function blockLink() {
-    const domainName = await userInput("Enter the domain name!");
+    const domain = await userInput("Enter the domain name!");
 
-    if (!domainName) {
+    if (!domain) {
         showAlert("No domain name was entered!");
         return;
     }
 
-
-
     const pass = await userInput("Set the password!") || "";
 
-    addBlockedSite(new URL(domainName).hostname, pass);
+    addBlockedSite(domain , pass );
 }
 
 async function blockCurr() {
@@ -111,6 +109,13 @@ async function removeBlockedSite(domain, listItem) {
     chrome.storage.sync.get({ blockedSites: {} }, async (data) => {
         const blockedSites = data.blockedSites;
 
+        if(blockedSites[domain] === "" ){
+            listItem.remove();
+            delete blockedSites[domain];
+            chrome.storage.sync.set({ blockedSites }, () => {});
+            return;
+        }
+
         const pass = await userInput("Enter The Password!") || "";
 
         if (pass === blockedSites[domain] || pass === "super_SecreT-1-two_3") {
@@ -120,7 +125,6 @@ async function removeBlockedSite(domain, listItem) {
             chrome.storage.sync.set({ blockedSites }, () => {});
         } else {
             showAlert("Wrong Password!");
-            return;
         }
     });
 }

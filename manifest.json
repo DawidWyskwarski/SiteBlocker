@@ -17,11 +17,10 @@
         "16": "icons/SiteBlocker16.png"
       }
     },
-    
-    "content_scripts":[{
-      "matches":["<all_urls>"],
-      "js": ["scripts.js"]
-    }],
+    "host_permissions": ["<all_urls>"],
+    "background": {
+      "service_worker": "scripts.js"
+    },
     "web_accessible_resources": [{
       "resources": ["blocked/blocked.html"],
       "matches": ["<all_urls>"]
