@@ -19,7 +19,7 @@ function redirect(tabUrl) {
         const curDomain = new URL(tabUrl).hostname;
 
         Object.entries(listOfBlockedSites).forEach(([domain, password]) => {
-            if (curDomain.toLowerCase.includes(domain) || domain.toLowerCase.includes(curDomain)) {
+            if (curDomain.toLowerCase().includes(domain.toLowerCase()) || domain.toLowerCase().includes(curDomain.toLowerCase())) {
                 const blockedPage = chrome.runtime.getURL("blocked/blocked.html");
                 window.location.href = blockedPage;    
             }
