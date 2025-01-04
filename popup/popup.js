@@ -76,11 +76,16 @@ function addBlockedSite(domain, password) {
     chrome.storage.sync.get({blockedSites: {}}, (data) => {
         const blockedSites = data.blockedSites;
 
-        if(blockedSites[domain]) {
-            showAlert("Site already blocked");
-            
-            return;
-        }
+        let error = false;
+
+        Object.entries(blockedSites).forEach(([dom,pass]) =>{
+           if(domain.toLowerCase().includes(dom.toLowerCase()) || dom.toLowerCase().includes(domain.toLowerCase())){
+                showAlert("Site already blocked");
+                error = true;
+           } 
+        });
+
+        if(error) return;
 
         const blockedList = document.getElementById("blocked-list");
         const listItem = document.createElement("li");
