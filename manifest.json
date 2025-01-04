@@ -11,12 +11,15 @@
       "scripting"],
     
     "action": {
-      "default_popup": "popup/popup.html",
-
-      "default_icon":{
-        "16": "icons/SiteBlocker16.png"
-      }
+      "default_popup": "popup/popup.html"
     },
+    "icons": {
+      "16": "icons/icon.png",
+      "32": "icons/icon.png",
+      "48": "icons/icon.png",
+      "128": "icons/icon.png"
+    },
+
     "host_permissions": ["<all_urls>"],
     "background": {
       "service_worker": "scripts.js"
